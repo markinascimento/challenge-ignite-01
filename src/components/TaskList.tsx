@@ -30,36 +30,31 @@ export function TaskList() {
   }
 
   function handleToggleTaskCompletion(id: number) {
-    // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const isTaskCompleted = tasks.map((tasks) => (
-      tasks.id === id
-        ? {
-          ...tasks,
-          isComplete: !tasks.isComplete
-        }
-        : (
-          tasks
-        )
-    ));
+    const isTaskCompleted = tasks.map((task) => (
+      task.id === id
+      ? {
+        ...task,
+        isComplete: !task.isComplete
+      }
+      : task
+    ))
 
     setTasks(isTaskCompleted);
   }
 
   function handleRemoveTask(id: number) {
-    // Remova uma task da listagem pelo ID
-    const removeTask = tasks.filter((task) => task.id !== id);
-    setTasks(removeTask);
+    setTasks(prevState => prevState.filter((task) => task.id !== id));
   }
 
   return (
     <section className="task-list container">
       <header>
-        <h2>Minhas tasks</h2>
+        <h2>Minhas Atividades</h2>
 
         <div className="input-group">
           <input 
             type="text" 
-            placeholder="Adicionar novo todo" 
+            placeholder="Adicionar nova" 
             onChange={(e) => setNewTaskTitle(e.target.value)}
             value={newTaskTitle}
           />
@@ -91,7 +86,6 @@ export function TaskList() {
               </button>
             </li>
           ))}
-          
         </ul>
       </main>
     </section>
